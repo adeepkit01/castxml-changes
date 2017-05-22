@@ -1,0 +1,116 @@
+Waf: Entering directory `/home/ankit/Videos/modbake/source/ns-3-dev/build'
+Modules to scan:  ['antenna', 'aodv', 'applications', 'bridge', 'buildings', 'config-store', 'core', 'csma', 'csma-layout', 'dsdv', 'dsr', 'energy', 'fd-net-device', 'flow-monitor', 'internet', 'internet-apps', 'lr-wpan', 'lte', 'mesh', 'mobility', 'mpi', 'network', 'nix-vector-routing', 'olsr', 'point-to-point', 'point-to-point-layout', 'propagation', 'sixlowpan', 'spectrum', 'stats', 'tap-bridge', 'topology-read', 'traffic-control', 'uan', 'virtual-net-device', 'visualizer', 'wave', 'wifi', 'wimax']
+api-scan-gcc_ILP32
+<ns3modulegen_core_customizations.SmartPointerTransformation object at 0x7f86e7aa7850>
+INFO Parsing source file "/home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/antenna-module.h" ... 
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/antenna-module.h:10:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/angles.h:25:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/vector.h:23:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/attribute.h:23:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/string:41:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/allocator.h:46:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/x86_64-linux-gnu/c++/5.4.1/bits/c++allocator.h:33:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/ext/new_allocator.h:33:
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/new:111:7: error: 'operator new' takes type size_t ('unsigned int') as first parameter
+void* operator new(std::size_t) _GLIBCXX_THROW (std::bad_alloc)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/new:113:7: error: 'operator new[]' takes type size_t ('unsigned int') as first parameter
+void* operator new[](std::size_t) _GLIBCXX_THROW (std::bad_alloc)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/new:119:7: error: 'operator new' takes type size_t ('unsigned int') as first parameter
+void* operator new(std::size_t, const std::nothrow_t&) _GLIBCXX_USE_NOEXCEPT
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/new:121:7: error: 'operator new[]' takes type size_t ('unsigned int') as first parameter
+void* operator new[](std::size_t, const std::nothrow_t&) _GLIBCXX_USE_NOEXCEPT
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/new:129:14: error: 'operator new' takes type size_t ('unsigned int') as first parameter
+inline void* operator new(std::size_t, void* __p) _GLIBCXX_USE_NOEXCEPT
+             ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/new:131:14: error: 'operator new[]' takes type size_t ('unsigned int') as first parameter
+inline void* operator new[](std::size_t, void* __p) _GLIBCXX_USE_NOEXCEPT
+             ^
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/antenna-module.h:10:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/angles.h:25:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/vector.h:23:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/attribute.h:23:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/string:52:
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.h:5640:5: error: parameter declaration for literal operator 'operator""s' is not valid
+    operator""s(const char* __str, size_t __len)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.h:5646:5: error: parameter declaration for literal operator 'operator""s' is not valid
+    operator""s(const wchar_t* __str, size_t __len)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.h:5653:5: error: parameter declaration for literal operator 'operator""s' is not valid
+    operator""s(const char16_t* __str, size_t __len)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.h:5658:5: error: parameter declaration for literal operator 'operator""s' is not valid
+    operator""s(const char32_t* __str, size_t __len)
+    ^
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/antenna-module.h:10:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/angles.h:25:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/vector.h:23:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/attribute.h:23:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/string:53:
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.tcc:1048:19: error: no matching function for call to 'operator new'
+      _Rep *__p = new (__place) _Rep;
+                  ^~~
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.tcc:578:20: note: in instantiation of member function 'std::basic_string<char16_t, std::char_traits<char16_t>, std::allocator<char16_t> >::_Rep::_S_create' requested here
+        _Rep* __r = _Rep::_S_create(__dnew, size_type(0), __a);
+                          ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.h:4217:18: note: in instantiation of function template specialization 'std::basic_string<char16_t, std::char_traits<char16_t>, std::allocator<char16_t> >::_S_construct<const char16_t *>' requested here
+          return _S_construct(__beg, __end, __a, _Tag());
+                 ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.h:4238:11: note: in instantiation of function template specialization 'std::basic_string<char16_t, std::char_traits<char16_t>, std::allocator<char16_t> >::_S_construct_aux<const char16_t *>' requested here
+          return _S_construct_aux(__beg, __end, __a, _Integral());
+                 ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.tcc:647:19: note: in instantiation of function template specialization 'std::basic_string<char16_t, std::char_traits<char16_t>, std::allocator<char16_t> >::_S_construct<const char16_t *>' requested here
+    : _M_dataplus(_S_construct(__s, __s + __n, __a), __a)
+                  ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.h:5654:14: note: in instantiation of member function 'std::basic_string<char16_t, std::char_traits<char16_t>, std::allocator<char16_t> >::basic_string' requested here
+    { return basic_string<char16_t>{__str, __len}; }
+             ^
+note: candidate function not viable: requires 1 argument, but 2 were provided
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/antenna-module.h:10:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/angles.h:25:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/vector.h:23:
+In file included from /home/ankit/Videos/modbake/source/ns-3-dev/build/ns3/attribute.h:23:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/string:53:
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.tcc:1048:19: error: no matching function for call to 'operator new'
+      _Rep *__p = new (__place) _Rep;
+                  ^~~
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.tcc:578:20: note: in instantiation of member function 'std::basic_string<char32_t, std::char_traits<char32_t>, std::allocator<char32_t> >::_Rep::_S_create' requested here
+        _Rep* __r = _Rep::_S_create(__dnew, size_type(0), __a);
+                          ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.h:4217:18: note: in instantiation of function template specialization 'std::basic_string<char32_t, std::char_traits<char32_t>, std::allocator<char32_t> >::_S_construct<const char32_t *>' requested here
+          return _S_construct(__beg, __end, __a, _Tag());
+                 ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.h:4238:11: note: in instantiation of function template specialization 'std::basic_string<char32_t, std::char_traits<char32_t>, std::allocator<char32_t> >::_S_construct_aux<const char32_t *>' requested here
+          return _S_construct_aux(__beg, __end, __a, _Integral());
+                 ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.tcc:647:19: note: in instantiation of function template specialization 'std::basic_string<char32_t, std::char_traits<char32_t>, std::allocator<char32_t> >::_S_construct<const char32_t *>' requested here
+    : _M_dataplus(_S_construct(__s, __s + __n, __a), __a)
+                  ^
+/usr/lib/gcc/x86_64-linux-gnu/5.4.1/../../../../include/c++/5.4.1/bits/basic_string.h:5659:14: note: in instantiation of member function 'std::basic_string<char32_t, std::char_traits<char32_t>, std::allocator<char32_t> >::basic_string' requested here
+    { return basic_string<char32_t>{__str, __len}; }
+             ^
+note: candidate function not viable: requires 1 argument, but 2 were provided
+12 errors generated.
+Traceback (most recent call last):
+  File "/home/ankit/Videos/modbake/source/ns-3-dev/bindings/python/ns3modulescan-modular.py", line 287, in <module>
+    ns3_module_scan(sys.argv[1], sys.argv[2], eval(sys.argv[3]), sys.argv[4], sys.argv[5])
+  File "/home/ankit/Videos/modbake/source/ns-3-dev/bindings/python/ns3modulescan-modular.py", line 267, in ns3_module_scan
+    castxml_options=castxml_options)
+  File "/home/ankit/Videos/modbake/source/pybindgen/pybindgen/castxmlparser.py", line 704, in parse_init
+    self.declarations = parser.parse(header_files, self.castxml_config)
+  File "build/bdist.linux-x86_64/egg/pygccxml/parser/__init__.py", line 51, in parse
+  File "build/bdist.linux-x86_64/egg/pygccxml/parser/project_reader.py", line 264, in read_files
+  File "build/bdist.linux-x86_64/egg/pygccxml/parser/project_reader.py", line 292, in __parse_file_by_file
+  File "build/bdist.linux-x86_64/egg/pygccxml/parser/source_reader.py", line 356, in read_file
+  File "build/bdist.linux-x86_64/egg/pygccxml/parser/source_reader.py", line 375, in read_cpp_source_file
+  File "build/bdist.linux-x86_64/egg/pygccxml/parser/source_reader.py", line 324, in create_xml_file
+RuntimeError: Error occurred while running CASTXML:  status:1
+Waf: Leaving directory `/home/ankit/Videos/modbake/source/ns-3-dev/build'
+Build failed
+ -> task in '' failed (exit status 1): 
+	{task 140642135605392: apiscan_task antenna-module.h -> modulegen__gcc_ILP32.py}
+''

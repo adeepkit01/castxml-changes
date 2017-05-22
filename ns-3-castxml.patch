@@ -1,0 +1,173 @@
+diff -r 923247c8ad3c bindings/python/ns3modulescan-modular.py
+--- a/bindings/python/ns3modulescan-modular.py	Mon May 22 01:22:58 2017 +0200
++++ b/bindings/python/ns3modulescan-modular.py	Mon May 22 15:26:08 2017 +0530
+@@ -4,13 +4,14 @@
+ import os.path
+ 
+ import pybindgen.settings
+-from pybindgen.gccxmlparser import ModuleParser, PygenClassifier, PygenSection, WrapperWarning, find_declaration_from_name
++from pybindgen.castxmlparser import ModuleParser, PygenClassifier, PygenSection, WrapperWarning, find_declaration_from_name
+ from pybindgen.typehandlers.codesink import FileCodeSink
+ from pygccxml.declarations import templates
+ from pygccxml.declarations.enumeration import enumeration_t
+ from pygccxml.declarations.class_declaration import class_t
+-from pygccxml.declarations.calldef import free_function_t, member_function_t, constructor_t, calldef_t
+-
++from pygccxml.declarations.free_calldef import free_function_t
++from pygccxml.declarations.calldef_members import constructor_t, member_function_t
++from pygccxml.declarations.calldef import calldef_t
+ 
+ ## we need the smart pointer type transformation to be active even
+ ## during gccxml scanning.
+@@ -34,6 +35,8 @@
+ def get_ns3_relative_path(path):
+     l = []
+     head = path
++    if not path:
++        return
+     while head:
+         new_head, tail = os.path.split(head)
+         if new_head == head:
+@@ -58,7 +61,8 @@
+             ns3_header = get_ns3_relative_path(pygccxml_definition.location.file_name)
+         except ValueError: # the header is not from ns3
+             return # ignore the definition, it's not ns-3 def.
+-
++        if not ns3_header:
++            return
+         definition_module = self.headers_map[ns3_header]
+ 
+         ## Note: we don't include line numbers in the comments because
+@@ -78,7 +82,9 @@
+         if isinstance(pygccxml_definition, member_function_t) \
+                 and pygccxml_definition.parent.name == 'Object' \
+                 and pygccxml_definition.name == 'GetObject':
+-            template_args = templates.args(pygccxml_definition.demangled_name)
++            print ("************************", pygccxml_definition.name)
++            print ("************************", str(pygccxml_definition))
++            template_args = templates.args(str(pygccxml_definition))
+             if template_args == ['ns3::Object']:
+                 global_annotations['template_instance_names'] = 'ns3::Object=>GetObject'
+ 
+@@ -222,18 +228,19 @@
+     callback_classes_file.write("]\n")
+ 
+ 
+-def ns3_module_scan(top_builddir, module_name, headers_map, output_file_name, cflags):
++def ns3_module_scan(top_builddir, module_name, headers_map, output_file_name, cflag):
+     module_parser = ModuleParser('ns.%s' % module_name.replace('-', '_'), 'ns3')
+     module_parser.add_pre_scan_hook(PreScanHook(headers_map, module_name))
+     #module_parser.add_post_scan_hook(post_scan_hook)
+ 
+-    gccxml_options = dict(
++    castxml_options = dict(
+         include_paths=[top_builddir],
+          define_symbols={
+             #'NS3_ASSERT_ENABLE': None,
+             #'NS3_LOG_ENABLE': None,
+             },
+-        cflags=('--gccxml-cxxflags "%s -DPYTHON_SCAN"' % cflags)
++         #cflags=(' -std=c++14') 
++         cflags=('-std=c++14 %s' % cflag) 
+         )
+ 
+     try:
+@@ -257,7 +264,7 @@
+                              None, whitelist_paths=[top_builddir],
+                              #includes=['"ns3/everything.h"'],
+                              pygen_sink=output_sink,
+-                             gccxml_options=gccxml_options)
++                             castxml_options=castxml_options)
+     module_parser.scan_types()
+ 
+     callback_classes_file = open(os.path.join(os.path.dirname(output_file_name), "callbacks_list.py"), "wt")
+diff -r 923247c8ad3c bindings/python/ns3modulescan.py
+--- a/bindings/python/ns3modulescan.py	Mon May 22 01:22:58 2017 +0200
++++ b/bindings/python/ns3modulescan.py	Mon May 22 15:26:08 2017 +0530
+@@ -4,11 +4,13 @@
+ import os.path
+ 
+ import pybindgen.settings
+-from pybindgen.gccxmlparser import ModuleParser, PygenClassifier, PygenSection, WrapperWarning
++from pybindgen.castxmlparser import ModuleParser, PygenClassifier, PygenSection, WrapperWarning
+ from pybindgen.typehandlers.codesink import FileCodeSink
+ from pygccxml.declarations import templates
+ from pygccxml.declarations.class_declaration import class_t
+-from pygccxml.declarations.calldef import free_function_t, member_function_t, constructor_t, calldef_t
++from pygccxml.declarations.free_calldef import free_function_t
++from pygccxml.declarations.calldef_members import constructor_t, member_function_t
++from pygccxml.declarations.calldef import calldef_t
+ 
+ 
+ ## we need the smart pointer type transformation to be active even
+diff -r 923247c8ad3c bindings/python/wscript
+--- a/bindings/python/wscript	Mon May 22 01:22:58 2017 +0200
++++ b/bindings/python/wscript	Mon May 22 15:26:08 2017 +0530
+@@ -51,7 +51,7 @@
+                    dest='python_disable')
+     opt.add_option('--apiscan',
+                    help=("Rescan the API for the indicated module(s), for Python bindings.  "
+-                         "Needs working GCCXML / pygccxml environment.  "
++                         "Needs working castxml / pygccxml environment.  "
+                          "The metamodule 'all' expands to all available ns-3 modules."),
+                    default=None, dest='apiscan', metavar="MODULE[,MODULE...]")
+     opt.add_option('--with-pybindgen',
+@@ -284,31 +284,31 @@
+         return
+ 
+ 
+-    ## Check gccxml version
++    ## Check castxml version
+     try:
+-        gccxml = conf.find_program('gccxml', var='GCCXML')
++        castxml = conf.find_program('castxml', var='CASTXML')
+     except WafError:
+-        gccxml = None
+-    if not gccxml:
+-        Logs.warn("gccxml missing; automatic scanning of API definitions will not be possible")
++        castxml = None
++    if not castxml:
++        Logs.warn("castxml missing; automatic scanning of API definitions will not be possible")
+         conf.report_optional_feature("pygccxml", "Python API Scanning Support", False,
+-                                     "gccxml missing")
++                                     "castxml missing")
+         return
+ 
+-    gccxml_version_line = os.popen(gccxml[0] + " --version").readline().strip()
+-    m = re.match( "^GCC-XML version (\d\.\d(\.\d)?)$", gccxml_version_line)
++    castxml_version_line = os.popen(castxml[0] + " --version").readline().strip()
++    m = re.match( "^GCC-XML version (\d\.\d(\.\d)?)$", castxml_version_line)
+     try:
+-        gccxml_version = m.group(1)
+-        gccxml_version_ok = ([int(s) for s in gccxml_version.split('.')] >= [0, 9])
++        castxml_version = m.group(1)
++        castxml_version_ok = ([int(s) for s in castxml_version.split('.')] >= [0, 1])
+     except AttributeError:
+-        gccxml_version = gccxml_version_line
+-        gccxml_version_ok = False
+-    conf.msg('Checking for gccxml version', gccxml_version)
+-    if not gccxml_version_ok:
+-        Logs.warn("gccxml version unknown or too old, need version >= 0.9; automatic scanning of API definitions will not be possible")
+-        conf.report_optional_feature("pygccxml", "Python API Scanning Support", False,
+-                                     "gccxml too old")
+-        return
++        castxml_version = castxml_version_line
++        castxml_version_ok = False
++    conf.msg('Checking for castxml version', castxml_version)
++    #if not castxml_version_ok:
++        #Logs.warn("castxml version unknown or too old, need version >= 0.9; automatic scanning of API definitions will not be possible")
++        #conf.report_optional_feature("pygccxml", "Python API Scanning Support", False,
++        #                             "castxml too old")
++        #return
+ 
+     ## If we reached
+     conf.env['ENABLE_PYTHON_SCANNING'] = True
+@@ -336,7 +336,7 @@
+     return ns3headers.path.abspath()
+ 
+ class apiscan_task(Task.Task):
+-    """Uses gccxml to scan the file 'everything.h' and extract API definitions.
++    """Uses castxml to scan the file 'everything.h' and extract API definitions.
+     """
+     after = 'gen_ns3_module_header ns3header'
+     before = 'cxx command'
