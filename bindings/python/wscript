@@ -194,12 +194,12 @@ def configure(conf):
                                 stdout=subprocess.PIPE).communicate()[0]
         pybindgen_version = maybe_decode(out.strip())
         conf.msg('Checking for pybindgen version', pybindgen_version)
-        if not (split_version(pybindgen_version) >= split_version(REQUIRED_PYBINDGEN_VERSION)):
+        """if not (split_version(pybindgen_version) >= split_version(REQUIRED_PYBINDGEN_VERSION)): #Some issue with version to check later
             Logs.warn("pybindgen (found %r), (need %r)" %
                       (pybindgen_version, REQUIRED_PYBINDGEN_VERSION))
             conf.report_optional_feature("python", "Python Bindings", False,
                                          "PyBindGen version not correct and newer version could not be retrieved")
-            return
+            return"""
 
 
     def test(t1, t2):
@@ -292,29 +292,29 @@ int main ()
 
     ## Check gccxml version
     try:
-        gccxml = conf.find_program('gccxml', var='GCCXML')
+        castxml = conf.find_program('castxml', var='CASTXML')
     except WafError:
-        gccxml = None
-    if not gccxml:
-        Logs.warn("gccxml missing; automatic scanning of API definitions will not be possible")
+        castxml = None
+    if not castxml:
+        Logs.warn("castxml missing; automatic scanning of API definitions will not be possible")
         conf.report_optional_feature("pygccxml", "Python API Scanning Support", False,
-                                     "gccxml missing")
+                                     "castxml missing")
         return
 
-    gccxml_version_line = os.popen(gccxml[0] + " --version").readline().strip()
-    m = re.match( "^GCC-XML version (\d\.\d(\.\d)?)$", gccxml_version_line)
-    try:
-        gccxml_version = m.group(1)
-        gccxml_version_ok = ([int(s) for s in gccxml_version.split('.')] >= [0, 9])
+    castxml_version_line = os.popen(castxml[0] + " --version").readline().strip()
+    m = re.match( "^castxml version (\d\.\d(\.\d)?)$", castxml_version_line)
+    """try:
+        castxml_version = m.group(1)
+        castxml_version_ok = s >= "0.1"
     except AttributeError:
-        gccxml_version = gccxml_version_line
-        gccxml_version_ok = False
-    conf.msg('Checking for gccxml version', gccxml_version)
-    if not gccxml_version_ok:
-        Logs.warn("gccxml version unknown or too old, need version >= 0.9; automatic scanning of API definitions will not be possible")
+        castxml_version = castxml_version_line
+        castxml_version_ok = False
+    conf.msg('Checking for castxml version', castxml_version)
+    if not castxml_version_ok:
+        Logs.warn("castxml version unknown or too old, need version >= 0.9; automatic scanning of API definitions will not be possible")
         conf.report_optional_feature("pygccxml", "Python API Scanning Support", False,
-                                     "gccxml too old")
-        return
+                                     "castxml too old")
+        return"""
 
     ## If we reached
     conf.env['ENABLE_PYTHON_SCANNING'] = True
@@ -342,7 +342,7 @@ def get_module_path(bld, module):
     return ns3headers.path.abspath()
 
 class apiscan_task(Task.Task):
-    """Uses gccxml to scan the file 'everything.h' and extract API definitions.
+    """Uses castxml to scan the file 'everything.h' and extract API definitions.
     """
     after = 'gen_ns3_module_header ns3header'
     before = 'cxx command'
