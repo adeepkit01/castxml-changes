@@ -111,7 +111,6 @@ def main(argv):
 
     if hasattr(module_customization, 'post_register_methods'):
         module_customization.post_register_methods(root_module)
-
     ns3modulegen_core_customizations.Object_customizations(root_module)
     ns3modulegen_core_customizations.Attribute_customizations(root_module)
     ns3modulegen_core_customizations.generate_callback_classes(root_module,

@@ -73,11 +73,13 @@ public:
   /**
    * \brief structure of unreachable destination - address and sequence number
    */
-  typedef struct
+  struct FailedDestination
   {
     Mac48Address destination; ///< destination address
     uint32_t seqnum; ///< sequence number
-  } FailedDestination;
+  };
+
+  typedef struct FailedDestination FailedDestination;
   /// Route request, inherited from MeshL2RoutingProtocol
   bool RequestRoute (uint32_t  sourceIface, const Mac48Address source, const Mac48Address destination,
                      Ptr<const Packet>  packet, uint16_t  protocolType, RouteReplyCallback  routeReply);

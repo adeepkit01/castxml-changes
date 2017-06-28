@@ -1094,13 +1094,14 @@ private:
   /**
    * A struct for packet, Wifi header, and timestamp.
    */
-  typedef struct
+  struct Item
   {
     Ptr<const Packet> packet; //!< the packet
     WifiMacHeader hdr; //!< the header
     Time timestamp; //!< the timestamp
-  } Item; //!< item structure
+  }; //!< item structure
 
+  typedef struct Item Item;
   /**
    * typedef for an iterator for a list of DcfManager.
    */
