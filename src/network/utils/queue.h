@@ -432,6 +432,12 @@ TypeId
 Queue<Item>::GetTypeId (void)
 {
   std::string name = GetTypeParamName<Queue<Item> > ();
+  TypeId tempid;
+  bool found = TypeId::LookupByNameFailSafe(("ns3::Queue<" + name + ">").c_str (), &tempid);
+  if (found)
+    {
+      return tempid;
+    }
   static TypeId tid = TypeId (("ns3::Queue<" + name + ">").c_str ())
     .SetParent<QueueBase> ()
     .SetGroupName ("Network")
